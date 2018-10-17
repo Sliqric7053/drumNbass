@@ -1,6 +1,6 @@
 function playSound(event) {
-    const audio = document.querySelector(`audio[data-key="${event.keyCode}"]`);
-    const key = document.querySelector(`.key[data-key="${event.keyCode}"]`);
+    const audio = document.querySelector(`audio[data-key="${event}"]`);
+    const key = document.querySelector(`.key[data-key="${event}"]`);
     
     if (!audio) return; // stop func from running all together
     
@@ -17,23 +17,14 @@ function removeTransition(event) {
     if (event.type !== 'transitionend') return; //skip if not 'transform' propertyName
     this.classList.remove('playing');
 }
-// const keys = document.querySelectorAll('.key');
-// keys.forEach(key => {
-//     key.addEventListener('transitionend', removeTransition);
-//     ['click','ontouchstart'].forEach(e => key.addEventListener(e, function () { 
-//         playSound(this.dataset.key)
-//      }, false))
-// });
-
-document.querySelectorAll('.key').forEach(key => {
-    key.addEventListener('transitionend', removeTransition)
-
-    ;['click','ontouchstart'].forEach(e => key.addEventListener(e, function () {
-        alert('click/touch', this.dataset.key);
+const keys = document.querySelectorAll('.key');
+keys.forEach(key => {
+    key.addEventListener('transitionend', removeTransition);
+    ['click', 'ontouchstart'].forEach(e => key.addEventListener(e, function () { 
         console.log(this.dataset.key);
         
-      playSound(this.dataset.key)
-    }, false))
-  })    
+        playSound(this.dataset.key);
+     }, false));
+});
 
-addEventListener('keydown', playSound);
+addEventListener('keydown', e => playSound(e.which));
