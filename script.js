@@ -7,10 +7,10 @@ function playSound(event) {
     audio.play();
     audio.currentTime = 0; // rewind to the start
     key.classList.add('playing');
-    alert('playSound func')
 }
 
 function checkDevice() {
+    if (brow) return;
 }
 
 function removeTransition(event) { 
@@ -20,8 +20,9 @@ function removeTransition(event) {
 const keys = document.querySelectorAll('.key');
 keys.forEach(key => {
     key.addEventListener('transitionend', removeTransition);
+    ['click', 'ontouchstart'].forEach(e => key.addEventListener(e, function () { 
+        playSound(this.dataset.key)
+     }, false))
 });
 
-
-addEventListener("touchstart", playSound);
-    addEventListener('keydown', playSound);
+addEventListener('keydown', playSound);
