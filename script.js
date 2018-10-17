@@ -7,10 +7,10 @@ function playSound(event) {
     audio.play();
     audio.currentTime = 0; // rewind to the start
     key.classList.add('playing');
+    alert('playSound func')
 }
 
 function checkDevice() {
-    if (brow) return;
 }
 
 function removeTransition(event) { 
@@ -23,5 +23,5 @@ keys.forEach(key => {
 });
 
 
+addEventListener("touchstart", playSound);
     addEventListener('keydown', playSound);
-    addEventListener("touchstart", playSound);
