@@ -30,6 +30,8 @@ document.querySelectorAll('.key').forEach(key => {
 
     ;['click','ontouchstart'].forEach(e => key.addEventListener(e, function () {
         alert('click/touch', this.dataset.key);
+        console.log(this.dataset.key);
+        
       playSound(this.dataset.key)
     }, false))
   })    
