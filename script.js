@@ -22,12 +22,6 @@ keys.forEach(key => {
     key.addEventListener('transitionend', removeTransition);
 });
 
-if (window) {
-    console.log('in window');
-    
+
     addEventListener('keydown', playSound);
-} else {
-    alert('in else');
-    
     addEventListener("touchstart", playSound);
-}
