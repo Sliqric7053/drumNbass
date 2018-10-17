@@ -9,6 +9,10 @@ function playSound(event) {
     key.classList.add('playing');
 }
 
+function checkDevice() {
+    if (brow) return;
+}
+
 function removeTransition(event) { 
     if (event.propertyName !== 'transform') return; //skip if not 'transform' propertyName
     this.classList.remove('playing');
@@ -18,4 +22,12 @@ keys.forEach(key => {
     key.addEventListener('transitionend', removeTransition);
 });
 
-addEventListener('keydown', playSound);
+if (window) {
+    console.log('in window');
+    
+    addEventListener('keydown', playSound);
+} else {
+    alert('in else');
+    
+    addEventListener("touchstart", playSound);
+}
