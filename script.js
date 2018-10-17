@@ -9,10 +9,6 @@ function playSound(event) {
     key.classList.add('playing');
 }
 
-function checkDevice() {
-    if (brow) return;
-}
-
 function removeTransition(event) { 
     if (event.type !== 'transitionend') return; //skip if not 'transform' propertyName
     this.classList.remove('playing');
@@ -20,9 +16,12 @@ function removeTransition(event) {
 const keys = document.querySelectorAll('.key');
 keys.forEach(key => {
     key.addEventListener('transitionend', removeTransition);
-    ['click', 'ontouchstart'].forEach(e => key.addEventListener(e, function () { 
-        playSound(this.dataset.key);
-     }, false));
+    ['click', 'ontouchstart', 'keydown'].forEach(e =>  {
+        key.addEventListener(e, function () {
+            if (e.which) { playSound(e.which) }
+            playSound(this.dataset.key);
+         }, false)
+    });
 });
 
-addEventListener('keydown', e => playSound(e.which));
+window.addEventListener('keydown', e => playSound(e.which));
