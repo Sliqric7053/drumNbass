@@ -21,8 +21,6 @@ const keys = document.querySelectorAll('.key');
 keys.forEach(key => {
     key.addEventListener('transitionend', removeTransition);
     ['click', 'ontouchstart'].forEach(e => key.addEventListener(e, function () { 
-        console.log(this.dataset.key);
-        
         playSound(this.dataset.key);
      }, false));
 });
