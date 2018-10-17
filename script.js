@@ -14,15 +14,24 @@ function checkDevice() {
 }
 
 function removeTransition(event) { 
-    if (event.propertyName !== 'transform') return; //skip if not 'transform' propertyName
+    if (event.type !== 'transitionend') return; //skip if not 'transform' propertyName
     this.classList.remove('playing');
 }
-const keys = document.querySelectorAll('.key');
-keys.forEach(key => {
-    key.addEventListener('transitionend', removeTransition);
-    ['click', 'ontouchstart'].forEach(e => key.addEventListener(e, function () { 
-        playSound(this.dataset.key)
-     }, false))
-});
+// const keys = document.querySelectorAll('.key');
+// keys.forEach(key => {
+//     key.addEventListener('transitionend', removeTransition);
+//     ['click','ontouchstart'].forEach(e => key.addEventListener(e, function () { 
+//         playSound(this.dataset.key)
+//      }, false))
+// });
+
+document.querySelectorAll('.key').forEach(key => {
+    key.addEventListener('transitionend', removeTransition)
+
+    ;['click','ontouchstart'].forEach(e => key.addEventListener(e, function () {
+        alert('click/touch', this.dataset.key);
+      playSound(this.dataset.key)
+    }, false))
+  })    
 
 addEventListener('keydown', playSound);
